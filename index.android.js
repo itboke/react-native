@@ -14,14 +14,11 @@ import {
   Navigator,
   TouchableHighlight,
   ListView,
-  TouchableOpacity,
-  ScrollView,
-  Animated,
-  TouchableWithoutFeedback
+  TouchableOpacity
 } from 'react-native';
-import Dimensions from 'Dimensions';
 import Search from './app/search';
 import Tabs from './app/tabs';
+import Swiper from './app/swiper';
 class Detail extends Component{
     render(){
         return(
@@ -77,35 +74,21 @@ class List extends Component{
     }
 }
 
-const screenWidth = Dimensions.get('window').width;
+
 export default class Novel extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            images: ['#dfe24a','#68eaf9','#ef9af9']
         };
     }
     render() {
-      // 图片列表
-      let images = this.state.images.map((value,i) => {
-          return (
-                <TouchableWithoutFeedback key={i}>
-                    <View style={{width:screenWidth,height:130,backgroundColor:value}}/>
-                </TouchableWithoutFeedback>
-          );
-      });
       return(
         <View style={styles.container}>
             <View style={styles.image}>
                 <Image style={{width:414,height:127}}
                 source={{uri: "http://upload.didadi.fm/data/upload/shop/media/05224087229341820.png"}} resizeMode="contain"></Image>
             </View>
-            <ScrollView horizontal={true}
-                    showsHorizontalScrollIndicator={false}
-                    showsVerticalScrollIndicator={false}
-                    ref={(scrollView) => { this._scrollView = scrollView;}}>
-                    <Animated.View style={{flexDirection:'row'}}>{images}</Animated.View>
-            </ScrollView>
+            <Swiper></Swiper>
             <Tabs></Tabs>
             <Navigator
                 style = {styles.main}
